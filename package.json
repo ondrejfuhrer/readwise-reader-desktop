@@ -1,0 +1,76 @@
+{
+  "name": "readwise-reader-desktop",
+  "productName": "Reader",
+  "version": "0.9.0-dev",
+  "description": "Simple Electron wrapper for Readwise Reader web app",
+  "main": "app/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make --platform=darwin",
+    "make-zip": "electron-forge make --platform=darwin --targets @electron-forge/maker-zip",
+    "make-dmg": "electron-forge make --platform=darwin --targets @electron-forge/maker-dmg",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\"",
+    "test": "mocha",
+    "release-notes": "gren release --data-source=commits",
+    "changelog": "gren changelog --data-source=commits --override",
+    "version": "echo $npm_package_version"
+  },
+  "repository": "https://github.com/ondrejfuhrer/readwise-reader-desktop",
+  "keywords": [
+    "Readwise",
+    "Reader",
+    "Electron",
+    "App"
+  ],
+  "author": "Ondrej Führer",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-dmg": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "@electron-forge/publisher-github": "^6.0.4",
+    "electron": "^23.0.0",
+    "electron-packager": "^17.1.1",
+    "github-release-notes": "^0.13.1",
+    "mocha": "^10.1.0"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "electron-window-state": "^5.0.3"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "assets/icons/macos/Reader.icns"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "platforms": [
+            "darwin"
+          ]
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "ondrejfuhrer",
+              "name": "readwise-reader-desktop"
+            },
+            "prerelease": true
+          }
+        }
+      ]
+    }
+  }
+}
